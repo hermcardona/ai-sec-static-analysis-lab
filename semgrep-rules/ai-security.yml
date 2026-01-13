@@ -1,0 +1,22 @@
+rules:
+  - id: ai.insecure-deserialization.pickle-load
+    message: >
+      Insecure AI model deserialization detected using pickle.load().
+      Loading untrusted model artifacts can lead to arbitrary code execution (RCE).
+      Use safer formats such as ONNX, SafeTensors, or enforce cryptographic integrity checks.
+    severity: ERROR
+    languages:
+      - python
+    patterns:
+      - pattern: pickle.load(...)
+    metadata:
+      category: security
+      subcategory: ai-model-security
+      technology:
+        - ai
+        - ml
+      cwe: "CWE-502"
+      confidence: HIGH
+      references:
+        - https://cwe.mitre.org/data/definitions/502.html
+        - https://docs.python.org/3/library/pickle.html
